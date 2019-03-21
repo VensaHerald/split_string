@@ -29,8 +29,7 @@ int main(void)
 		{
 			if (*in_str != 10)
 			{
-				// following syntax does not work.  Due to mult dim arrays not
-				// being contiguous?  Will test
+				// Corrected, split_str is now char**
 				split_str[y][x] = *in_str;
 			}
 			x++;
