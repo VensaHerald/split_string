@@ -31,10 +31,10 @@ int main(void)
 		// re-zero x val
 		while (x < dims)
 		{
-			
+			// check whether the current in_str(source) value is LF char.  if so ignore and increment source
 			if (*in_str != 10)
 			{
-				// Corrected, split_str is now char**
+				// if not LF char then assign to correct part of split_str array and increment counters
 				split_str[y][x] = *in_str;
 				x++;
 				in_str++;
@@ -42,17 +42,19 @@ int main(void)
 			} else {in_str++;}
 			
 		}
+		// re-zero x counter and increment y
 		x = 0;
 		y++;
 	}
-	
+	// call function to print results to check
 	print_ar_m(split_str,dims);	
 
-
+// clear assigned memory
 free(split_str);
 }
 
-
+// function looping through multidimensional square array mult_ar of size dims 
+// prints the values in a grid
 int print_ar_m(char** mult_ar, int dims)
 {
 	int y = 0,x = 0;
@@ -64,7 +66,6 @@ int print_ar_m(char** mult_ar, int dims)
 			x++;
 		}
 		printf("\n");
-		// re-zero x val
 		x = 0;
 		y++;
 	}
