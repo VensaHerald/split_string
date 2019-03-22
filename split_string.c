@@ -18,13 +18,10 @@ int main(void)
 	//dummy inputs
 	char* str = "abc\ndef\nghi";
 	//char* str = "abcd\nefgh\nijkl\nmnop";
+		
+	char* str2 = malloc(sizeof(str));
+	str2 = vert_tran(str);
 	
-	// before
-	printf("%s\n\n", str);
-	
-	char* str2 = vert_tran(str);
-	// after
-	printf("%s\n", str);
 	free(str2);
 }
 
@@ -50,11 +47,12 @@ char* vert_tran(char* str){
 	}
 	// reform string(char*) from char**
 	char* str2 = rejoin_str(square, dims);
-	
+		
 	// clear allocated memory
-	for (int i = 0; i<dims; i++) free(square[i]);
+	for (i = 0; i<dims; i++) free(square[i]);
 	free(square);
 	free(row_temp);
+	
 	// return value
 	return str2;
 	
@@ -86,19 +84,23 @@ char* hor_tran(char *str)
 
 char* rejoin_str(char** in_ar, int dims)
 {
-char* start = malloc((sizeof(char)*dims*dims)+dims-1);
-int y,x, count = 0;
+	char* start = malloc((sizeof(char)*(dims*(dims+1)-1)));
+	int y,x, count = 0;
 
 	for (y = 0; y < dims; y++)
 	{
 		for (x = 0; x < dims; x++) 
 		{
 		start[count] = in_ar[y][x];
-		//printf("%c", in_ar[y][x]);
-		//printf("%i\n", count);
 		count++;
+		
 		}
-		start[count++] = '\n';
+		if (y != dims-1) 
+		{
+			start[count++] = '\n';
+		} else{
+			start[count] = '\0';
+			}
 	}
 	
 	return start;
@@ -112,6 +114,7 @@ int calc_dims(char* str){
 
 char** split_ar(char* in_str)
 {
+	char* start = in_str;
 	// Get input string length
 	double length = strlen(in_str);
 	// Calculate number of EOL chars(\n) in string
@@ -151,6 +154,7 @@ char** split_ar(char* in_str)
 		x = 0;
 		y++;
 	}
+	in_str = start;
 	return split_str;
 	
 }
