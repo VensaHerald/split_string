@@ -22,9 +22,10 @@ int main(void)
 	// before
 	printf("%s\n\n", str);
 	
-	str = vert_tran(str);
+	char* str2 = vert_tran(str);
 	// after
 	printf("%s\n", str);
+	free(str2);
 }
 
 
@@ -48,14 +49,14 @@ char* vert_tran(char* str){
 	j++;
 	}
 	// reform string(char*) from char**
-	str = rejoin_str(square, dims);
+	char* str2 = rejoin_str(square, dims);
 	
 	// clear allocated memory
 	for (int i = 0; i<dims; i++) free(square[i]);
 	free(square);
 	free(row_temp);
 	// return value
-	return str;
+	return str2;
 	
 }
 
@@ -73,12 +74,12 @@ char* hor_tran(char *str)
 	for (i = 0; i<dims; i++) square[i][j] = col_temp[i];
 	j++;
 	}
-	str = rejoin_str(square, dims);
+	char* str2 = rejoin_str(square, dims);
 	for (int i = 0; i<dims; i++) free(square[i]);
 	free(square);
 	free(col_temp);
 	
-	return str;
+	return str2;
 }
 
 
